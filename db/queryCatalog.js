@@ -19,7 +19,8 @@ const passHash=require('../service/passwordService')
         return person.rows[0].row
     }
     static async getLocation(title){
-        const currentTime = new Date().toLocaleTimeString('ru-RU', { timeZone: 'Europe/Moscow' }).substring(0,2)
+        try{
+            const currentTime = new Date().toLocaleTimeString('ru-RU', { timeZone: 'Europe/Moscow' }).substring(0,2)
         const time=parseInt(currentTime)>=0&&parseInt(currentTime)<=5?'night':'day'
         const location = await db.query('SELECT * FROM location where typelocation=$1 AND time=$2',[title,time])
         const stack={
@@ -40,6 +41,10 @@ const passHash=require('../service/passwordService')
         }
         console.log(currentTime.substring(0,2))
         return result
+        }catch(e){
+           console.log(e)
+        }
+        
     }
     static async getPoint(title){
         const point = await db.query('SELECT * FROM location where typepoint=$1',[title])
