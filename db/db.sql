@@ -1,0 +1,3 @@
+create TABLE person(id SERIAL PRIMARY KEY,login VARCHAR(15),pass VARCHAR,nickname VARCHAR(15),online BOOLEAN,hobby VARCHAR(30),about VARCHAR(40),avatar VARCHAR)
+
+CREATE TABLE home (id SERIAL PRIMARY KEY, title VARCHAR(15), bg VARCHAR, pass VARCHAR(10), admin INTEGER, FOREIGN KEY (admin) REFERENCES person (id))
